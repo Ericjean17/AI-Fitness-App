@@ -7,28 +7,28 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity // Instances of this class can be mapped to rows in database table
-@Table(name = "users") // Links this entity to users table
-@Data // Generates getters and setters, toString(), required constructor
+@Entity // Hibernate will map instances of this class to database table
+@Table(name = "users") // Entity links to users table
+@Data // Generates getters and setters, toString(), equals(), hashCode(), constructor with lombok
 public class User {
-    @Id // Indicates id will be the primary key
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Id // Indicates id will be the primary key of entity
+    @GeneratedValue(strategy = GenerationType.UUID) // Hibernate generates primary key as UUID
     private String id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false) // Unique email and cannot be null
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false) // these fields cannot have a null value in database
     private String password;
     private String firstName;
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) // Tells JPA how to store enum in database
     private UserRole role = UserRole.USER;
 
-    @CreationTimestamp // Time generated once when entity is inserted into database
+    @CreationTimestamp // Hibernate sets timestamp when entity is first created
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp // Time regenerated every time entity is updated in database by Hibernate
+    @UpdateTimestamp // Updates timestamp whenever entity is updated
     private LocalDateTime updatedAt;
 }
