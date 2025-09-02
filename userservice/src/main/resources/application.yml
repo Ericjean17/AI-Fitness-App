@@ -1,0 +1,13 @@
+#spring.application.name=userservice - application.properties
+# main configuration file. configures how app runs, and how Hibernate handles database connection,
+spring:
+  application:
+    name: userservice
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fitness_user_db # tells Spring where database lives
+    username: postgres
+    password: postgrespw
+  jpa: #Hibernate uses Java Persistence API, used to map classes to database tables
+    hibernate:
+      ddl-auto: update # Hibernate automatically creates/updates tables in database to match entity classes
+    database-platform: org.hibernate.dialect.PostgreSQLDialect #generate PostgreSQL friendly SQL
