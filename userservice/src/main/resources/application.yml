@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: userservice
+    name: user-service
   datasource:
     url: jdbc:postgresql://localhost:5432/fitness_user_db # tells Spring where database lives
     username: postgres
@@ -14,3 +14,8 @@ spring:
     hibernate:
       ddl-auto: update # Hibernate automatically creates/updates tables in database to match entity classes
     database-platform: org.hibernate.dialect.PostgreSQLDialect #generate PostgreSQL friendly SQL
+
+eureka:
+  client:
+    serviceUrl: #locates eureka server
+      defaultZone: http://localhost:8761/eureka/

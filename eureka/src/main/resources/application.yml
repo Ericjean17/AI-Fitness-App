@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: eureka
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    # This app will not register itself as a client in Eureka registry
+    # Since this is the server itself, doesn't make sense to register with itself
+    register-with-eureka: false
+    fetch-registry: false # server doesn't fetch other instances,
+    # normally Eureka client pulls a list of all registered services from registry
