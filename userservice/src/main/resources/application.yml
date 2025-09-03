@@ -1,5 +1,8 @@
 #spring.application.name=userservice - application.properties
 # main configuration file. configures how app runs, and how Hibernate handles database connection,
+server:
+  port: 8081
+
 spring:
   application:
     name: userservice
