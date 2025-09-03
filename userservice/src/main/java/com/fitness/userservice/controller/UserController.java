@@ -32,4 +32,10 @@ public class UserController {
     public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(userService.register(request));
     }
+
+    // Check if the user exists in the database (called from activity service)
+    @GetMapping("/{userId}/validate")
+    public ResponseEntity<Boolean> validateUser(@PathVariable String userId) {
+        return ResponseEntity.ok(userService.existByUserId(userId));
+    }
 }

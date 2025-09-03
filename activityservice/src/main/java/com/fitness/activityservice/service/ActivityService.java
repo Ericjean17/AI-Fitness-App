@@ -15,10 +15,17 @@ import java.util.stream.Collectors;
 public class ActivityService {
 
     private final ActivityRepository activityRepository;
+    private final UserValidationService userValidationService;
 
     // Converts the ActivityRequest sent from the controller and builds the Activity entity.
     // Saves the entity into the database, and returns the ActivityResponse
     public ActivityResponse trackActivity(ActivityRequest request) {
+
+        boolean isValidUser = userValidationService.validateUser(request.getUserId());
+        if (!isValidUser) {
+            throw new RuntimeException("Invalid User" + request.getUserId());
+        }
+
         Activity activity = Activity.builder()
                 .userId(request.getUserId())
                 .type(request.getType())

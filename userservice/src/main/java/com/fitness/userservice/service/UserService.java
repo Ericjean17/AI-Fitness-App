@@ -6,11 +6,13 @@ import com.fitness.userservice.model.User;
 import com.fitness.userservice.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
+@Slf4j // used for log messages
 public class UserService {
 
 //    @Autowired
@@ -53,5 +55,10 @@ public class UserService {
 
         User savedUser = repository.save(user);
         return getUserResponse(savedUser); // Tells controller that user has been saved
+    }
+
+    public Boolean existByUserId(String userId) {
+        log.info("Calling User Validation API for userId: {}", userId);
+        return repository.existsById(userId);
     }
 }
