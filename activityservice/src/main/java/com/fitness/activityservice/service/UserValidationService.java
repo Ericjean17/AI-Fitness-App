@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 @Slf4j
 @RequiredArgsConstructor // sees userServiceWebClient as a required dependency
 public class UserValidationService {
+    // Spring's HTTP client
     private final WebClient userServiceWebClient; // bean from WebClientConfig is injected here
 
     // ActivityService calls smth like UserValidationService.validateUser("1")
@@ -24,9 +25,9 @@ public class UserValidationService {
         try {
             return Boolean.TRUE.equals(userServiceWebClient.get() //creates get request
                     .uri("/api/users/{userId}/validate", userId)//fill uri with userId value
-                    .retrieve()//send request + waits for a response back
+                    .retrieve()//send request and returns boolean response back
                     .bodyToMono(Boolean.class) //expect body as boolean
-                    .block());//wait until response arrives
+                    .block());//wait until response arrives to return response
         } catch (WebClientResponseException e) {
             if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
                 throw new RuntimeException("User Not Found: " + userId);

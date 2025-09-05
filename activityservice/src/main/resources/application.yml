@@ -1,10 +1,15 @@
 spring:
   application:
-    name: activity-service
+    name: ACTIVITY-SERVICE
   data:
     mongodb:
       uri: mongodb://localhost:27017/fitness-activity
       database: fitness-activity
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 server:
   port: 8082
@@ -13,3 +18,17 @@ eureka:
   client:
     serviceUrl: #locates eureka server
       defaultZone: http://localhost:8761/eureka/
+    # idk how localhost turned into Eric.mshome in eureke server so...
+  instance:
+    hostname: localhost # forces services to register with localhost instead of machine hostname (Eric.mshome.net:8081)
+    prefer-ip-address: true # uses IP address for service communication
+    instance-id:
+
+
+rabbitmq:
+  exchange:
+    name: fitness.exchange
+  queue:
+    name: activity.queue
+  routing:
+    key: activity.tracking

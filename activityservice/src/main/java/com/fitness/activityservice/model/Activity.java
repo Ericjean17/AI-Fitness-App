@@ -17,7 +17,7 @@ import java.util.Map;
 @Data
 @Builder // Lombok automates implementation of Builder design pattern
 @AllArgsConstructor // Generates a constructor that initializes all fields
-@NoArgsConstructor // Generates a no-argument constructor. Jackson needs it to create an empty object
+@NoArgsConstructor // Jackson needs it to create an empty object
                     // before populating its fields during deserialization (JSON -> Object)
 public class Activity {
     @Id

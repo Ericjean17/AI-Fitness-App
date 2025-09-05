@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/activities")
-@AllArgsConstructor
+// DEPENDENCY INJECTION
+// Spring Boot starts -> Scans for classes with @Component/@Service/@Repository and creates beans for them
+// @AllArgsConstructors/@RequiredArgsConstructor inject dependencies
+// ActivityController gets ActivityService via constructor injection
+@RestController // Automatically converts Java objects to JSON for responses
+@RequestMapping("/api/activities") // every endpoint starts with /api/activities
+@AllArgsConstructor // Spring uses this constructor for dependency injection
 public class ActivityController {
 
     // If a bean of type ActivityService is in the application context, creates an instance of ActivityController
+    // since ActivityController depends on ActivityService having a bean
     // Spring then uses generated constructor to inject the ActivityService automatically into the new instance
     private ActivityService activityService;
 
