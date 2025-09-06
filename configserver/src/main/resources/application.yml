@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native #configs are stored locally
+  #Tells config server to look for config files in /config folder
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
+
+server:
+  port: 8888
+
+# When a service like the gateway requests config via import:optional:configserver...
+# it looks for a file matching the service name (e.g., api-gateway.yml) and retruns that config
+# to the requesting service

@@ -1,26 +1,32 @@
 #spring.application.name=userservice - application.properties
 # main configuration file. configures how app runs, and how Hibernate handles database connection,
-server:
-  port: 8081
+#server:
+#  port: 8081
 
 spring:
   application:
     name: user-service
-  datasource:
-    url: jdbc:postgresql://localhost:5432/fitness_user_db # tells Spring where database lives
-    username: postgres
-    password: postgrespw
-  jpa: #Hibernate uses Java Persistence API, used to map classes to database tables
-    hibernate:
-      ddl-auto: update # Hibernate automatically creates/updates tables in database to match entity classes
-    database-platform: org.hibernate.dialect.PostgreSQLDialect #generate PostgreSQL friendly SQL
+  config:
+    # tells each microservice to fetch its configuration from the config server at startup
+    # optional: service will start if the config server is unavailable
+    # *service requests its config using its application name (in this case, user-service.yml)
+    import: optional:configserver:http://localhost:8888
 
-eureka:
-  client:
-    serviceUrl: #locates eureka server
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
-    instance-id:
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/fitness_user_db # tells Spring where database lives
+#    username: postgres
+#    password: postgrespw
+#  jpa: #Hibernate uses Java Persistence API, used to map classes to database tables
+#    hibernate:
+#      ddl-auto: update # Hibernate automatically creates/updates tables in database to match entity classes
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect #generate PostgreSQL friendly SQL
+#
+#eureka:
+#  client:
+#    serviceUrl: #locates eureka server
+#      defaultZone: http://localhost:8761/eureka/
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#    instance-id:
 
