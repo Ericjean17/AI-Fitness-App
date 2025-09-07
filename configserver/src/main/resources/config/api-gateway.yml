@@ -1,6 +1,12 @@
 spring:
   application:
     name: api-gateway
+  security:
+    oauth2:
+      resourceserver: # OAuth2 resource server that validates tokens but doesn't issue them
+        jwt: # jwt is token format
+          # points to JSON web key set endpoints where gateway can fetch public keys to verify JWT signatures
+          jwk-set-uri: http://localhost:8181/realms/fitness-oauth2/protocol/openid-connect/certs
   cloud:
     gateway:
       routes: # checks if req has path of /api/users, redirects to USER-SERVICE

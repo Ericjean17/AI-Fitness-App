@@ -1,6 +1,5 @@
-package com.fitness.userservice.dto;
+package com.fitness.gateway.user;
 
-import com.fitness.userservice.model.UserRole;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -13,7 +12,6 @@ public class UserResponse { // Will have same fields as User model from database
     private String password;
     private String firstName;
     private String lastName;
-    private UserRole role = UserRole.USER;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

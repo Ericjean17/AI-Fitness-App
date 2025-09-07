@@ -18,6 +18,8 @@ public class User {
     @Column(unique = true, nullable = false) // Unique email and cannot be null
     private String email;
 
+    private String keycloakId;
+
     @Column(nullable = false) // these fields cannot have a null value in database
     private String password;
     private String firstName;
