@@ -34,7 +34,10 @@ public class ActivityController {
     // Frontend data will become an ActivityRequest object with @RequestBody
     // ActivityResponse will be a DTO that returns the user's activity from the database
     @PostMapping
-    public ResponseEntity<ActivityResponse> trackActivity(@RequestBody ActivityRequest request) {
+    public ResponseEntity<ActivityResponse> trackActivity(@RequestBody ActivityRequest request, @RequestHeader("X-User-ID") String userId) {
+        if (userId != null) {
+            request.setUserId(userId);
+        }
         return ResponseEntity.ok(activityService.trackActivity(request));
     }
 
